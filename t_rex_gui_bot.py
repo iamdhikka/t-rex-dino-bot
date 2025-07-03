@@ -73,4 +73,10 @@ class DinoBot:
 
         print("❌ Bot dihentikan.")
 
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = DinoBot(root)
+    root.mainloop()
+
+
 
