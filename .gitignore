@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.spec
+dist/
+build/
+
+
+git init
+git add .
+git commit -m "Initial commit: Dino Bot with GUI"
+git branch -M main
+git remote add origin https://github.com/username/t-rex-dino-bot.git
+git push -u origin main
