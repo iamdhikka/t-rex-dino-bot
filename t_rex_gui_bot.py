@@ -10,11 +10,19 @@ class DinoBot:
     def __init__(self, master):
         self.master = master
         self.master.title("🦖 T-Rex Game Bot by Andhika")
-        self.master.geometry("300x180")
+        self.master.geometry("320x250")
         self.running = False
 
         self.label = tk.Label(master, text="Klik Start untuk jalankan bot.")
         self.label.pack(pady=10)
+
+        # Tambah slider sensitivitas
+        self.sens_label = tk.Label(master, text="Sensitivitas Deteksi:")
+        self.sens_label.pack()
+
+        self.threshold = tk.IntVar(value=600)
+        self.slider = tk.Scale(master, from_=100, to=1500, orient="horizontal", variable=self.threshold)
+        self.slider.pack()
 
         self.start_button = tk.Button(master, text="Start Bot", command=self.start_bot)
         self.start_button.pack(pady=5)
@@ -41,8 +49,8 @@ class DinoBot:
         self.master.destroy()
 
     def run_bot(self):
-        time.sleep(2)  # Waktu untuk buka jendela game
-        x, y, w, h = 340, 390, 100, 30  # Sesuaikan jika diperlukan
+        time.sleep(2)  # Waktu untuk buka game
+        x, y, w, h = 340, 390, 100, 30  # Area deteksi
 
         while self.running:
             image = pyautogui.screenshot(region=(x, y, w, h))
@@ -51,14 +59,5 @@ class DinoBot:
             _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
             count = cv2.countNonZero(thresh)
 
-            if count > 300:
-                print("🦖 Jump!")
-                pyautogui.press("space")
-                time.sleep(0.15)
-
-        print("❌ Bot dihentikan.")
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = DinoBot(root)
-    root.mainloop()
+            # Ambil nilai threshold dari slider
+            current_threshold = self.threshold.get()
