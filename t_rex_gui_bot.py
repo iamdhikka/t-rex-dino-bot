@@ -6,6 +6,10 @@ import pyautogui
 import numpy as np
 import cv2
 
+print("Bot aktif!")
+
+# lalu kode seperti biasa...
+
 class DinoBot:
     def __init__(self, master):
         self.master = master
@@ -61,3 +65,12 @@ class DinoBot:
 
             # Ambil nilai threshold dari slider
             current_threshold = self.threshold.get()
+
+            if count > current_threshold:
+                print(f"Lompat! (Deteksi: {count} > {current_threshold})")
+                pyautogui.press("space")
+                time.sleep(0.15)
+
+        print("❌ Bot dihentikan.")
+
+
